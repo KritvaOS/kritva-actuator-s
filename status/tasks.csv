@@ -1,0 +1,9 @@
+task_id,legacy_id,title,execution,readiness,implementation_commit
+ACT-S-001,ACT-02-001,Define elbow load cases and mechanical requirements,NOT_STARTED,PLANNABLE,
+ACT-S-002,ACT-02-002,Motor/gearbox interface constraints and gearbox candidate comparison,NOT_STARTED,PLANNABLE,
+ACT-S-003,ACT-02-003,"Shaft, bearing and housing calculations",NOT_STARTED,PLANNABLE,
+ACT-S-004,ACT-02-004,Mechanical CAD assembly and fabrication drawings,NOT_STARTED,PLANNABLE,
+ACT-S-005,ACT-02-005,Fabrication and assembly,NOT_STARTED,HARDWARE-BLOCKED,
+ACT-S-006,ACT-02-006,"Mechanical characterisation (backlash, repeatability, load, thermal support)",NOT_STARTED,HARDWARE-BLOCKED,
+ACT-S-007,ACT-02-007,Test fixture design and build,NOT_STARTED,HARDWARE-BLOCKED,
+ACT-S-008,ACT-02-008,"Mechanical fixes, CAD release and documentation",NOT_STARTED,PLANNABLE,
