@@ -7,7 +7,7 @@ These instructions apply to the `kritva-actuator-s` repository, a child of `Krit
 - This repository holds the mechanical design for one actuator variant (`sizing/`, `cad/`, `drawings/`, `assembly/`, `bom/`, `tests/`). `sizing/inputs.json` values are placeholders until replaced with variant-specific values; do not present them as validated.
 - Shared sizing engine, interface and units are owned by the parent. Do not copy or fork them here; record the parent commit used for any result.
 
-- Mechanical work is on HOLD (D-003) until Dinesh explicitly lifts it. Do not start CAD release, procurement, fabrication or design freeze work, and do not treat any check in this repository as physical safety or design acceptance.
+- The mechanical HOLD (kritva-program D-003) was lifted by Dinesh in ACT-DEC-029 (2026-10-18). That does not authorise CAD release, procurement, fabrication or design freeze work by itself: these need Gate A and the pending decisions in the parent `planning/v1/DECISIONS.md`, with independent review (ACT-DEC-014). Fabrication starts only after Gate A passes plus the release and procurement gap (ACT-DEC-033). Do not treat any check in this repository as physical safety or design acceptance.
 - Status reports (`status/status.json`, schema 2.0) are planning-only. Regenerate them from `status/tasks.csv`; do not edit them by hand, and do not mark tasks accepted. Nothing here creates program credit.
 - Interface, CAN protocol, units and shared requirements are owned by the parent `kritva-actuator` repository (ICD at `docs/interfaces/`). Do not redefine them in a child repository.
 
