@@ -152,7 +152,7 @@ Labels: INPUT is edited by hand and read by a tool or review; GENERATED is writt
 | `status/tasks.csv` | Task facts (ID, execution, readiness, commit) | INPUT | Mechanical owner edits, Project Lead approves | Source for the status report |
 | `status/status.json`, `status.schema.json`, `workstream.json` | Generated status report, vendored schema (with `.sha256`), workstream ID | GENERATED (`status.json`); SNAPSHOT (vendored schema) | Generated | Never hand-edit `status.json` |
 | `Makefile` | `make check`, `check-bom`, `check-inputs`, `check-status`, `check-readme` | INPUT; IMPLEMENTED | Project Lead | |
-| `.github/workflows/` | `checks.yml`, `commit-message-check.yml`, `secret-scan.yml` | AUTHORITATIVE | Project Lead | |
+| `.github/workflows/` | `checks.yml`, `commit-message-check.yml`, `readme-check.yml`, `secret-scan.yml` | AUTHORITATIVE | Project Lead | |
 | `.github/CODEOWNERS` | Required reviewers | AUTHORITATIVE | Project Lead | Single owner today |
 | `AGENTS.md`, `SECURITY.md`, `.gitattributes`, `.gitignore`, `LICENSE` | Contributor and AI-assistant rules, security reporting, LFS rules, ignored files, licence | AUTHORITATIVE | Project Lead | |
 
@@ -248,12 +248,13 @@ Evidence has types that are not interchangeable (software test, calculation, sim
 
 ## 11. Build, Test, Regression and Validation
 
-CI runs three separate workflows (below). None is a design calculation, a CAD review or a physical test: `make check` does not recalculate sizing (the engine and its golden-case checks live in the parent), and a passing check does not close a gate.
+CI runs four separate workflows (below). None is a design calculation, a CAD review or a physical test: `make check` does not recalculate sizing (the engine and its golden-case checks live in the parent), and a passing check does not close a gate.
 
 | Workflow | Trigger | What it runs |
 |---|---|---|
 | `checks` | push to `main`; pull requests | `make check` (BOM schema, sizing inputs keys and status only) |
 | `commit-message-check` | pull requests | the commit checker's unit tests, then the checker on the commits in the pull request (rejects session trailers and links only) |
+| `readme-check` | pull requests; push to `main` | the README checker's unit tests, then `python3 scripts/check_readme.py README.md --root .` (structure, metadata and local links only; not a required check yet, D-067) |
 | `secret-scan` | push to `main`; pull requests; manual dispatch | gitleaks over the git history |
 
 | Check | Command | Effect | Runs in CI? |
@@ -262,7 +263,7 @@ CI runs three separate workflows (below). None is a design calculation, a CAD re
 | Sizing inputs against the engine keys | `make check-inputs` | check | yes (`checks`) |
 | Status report against `status/tasks.csv` | `make check-status` | check | yes (`checks`) |
 | All of the above | `make check` | check | yes |
-| README standard | `make check-readme` | check | no, run locally |
+| README standard | `make check-readme` | check | yes (`readme-check`; not a required check yet, D-067) |
 | README checker regression tests | `python3 -m unittest discover -s tests/readme_check -v` | check | no, run locally |
 | Commit checker tests | `python3 -m unittest discover -s tests/commit_message_check -v` | check | yes (`commit-message-check`) |
 | Status generator tests | `python3 -m unittest discover -s scripts/status -p "test_*.py" -v` | check | no, run locally |
@@ -282,6 +283,7 @@ The Makefile has only the check targets above; there is no clean or generate tar
 |---|---|---|---|
 | `checks` | `make check`: BOM schema, sizing inputs, status | `make check` (or one target: `make check-bom`, `make check-inputs`, `make check-status`) | `check-bom`: wrong column or duplicate item ID in `bom/MECHANICAL_BOM.csv`. `check-inputs`: a key is missing or not a number in `sizing/inputs.json`. `check-status`: `status/status.json` is out of date; run `python3 scripts/status/gen_status.py --root .` and commit the result (never edit it by hand) |
 | `commit-message-check` | Unit tests of the checker, then the checker on every commit in the PR | `python3 -m unittest discover -s tests/commit_message_check -v` then `python3 scripts/security/check_commit_messages.py --range origin/main..HEAD` | A commit carries a `Claude-Session:` trailer or session link. Amend the latest unpushed commit (`git commit --amend`). For commits already pushed, ask the owner before rewriting history |
+| `readme-check` | Unit tests of the README checker, then the checker on `README.md` | `python3 -m unittest discover -s tests/readme_check -v` then `make check-readme` | A required heading, metadata field or local link is missing or broken in `README.md`; `make check-readme` prints the message, fix the README. It is not a required check yet (D-067) |
 | `secret-scan` | gitleaks 8.18.4 over the full git history | Install gitleaks 8.18.4, then `gitleaks detect --source . --redact --verbose --exit-code 1` | A credential, key or token is in the history. Do not add an allowlist entry. Tell the Security Owner (Dinesh) at once; the secret must be revoked or rotated, and removing it in a later commit is not enough |
 
 If the failure is in a step you did not touch, rerun the job once from the Actions page; if it fails again, ask the owner. If the log shows a missing tool or Python module, the runner image changed: report it rather than disabling the check.
