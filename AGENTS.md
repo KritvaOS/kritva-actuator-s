@@ -15,6 +15,8 @@ These instructions apply to the `kritva-actuator-s` repository, a child of `Krit
 
     make check
 
+When `README.md` changes, also run `make check-readme` (Kritva README standard, kritva-program D-055); it checks structure, metadata fields and local links only, not accuracy or approval. The checker's regression tests are in `tests/readme_check/`.
+
 ## Secrets and data
 
 - Never commit credentials, tokens, private keys, production data or personal data. Use obviously fake values in examples and mark them as such.
