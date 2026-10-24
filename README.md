@@ -1,14 +1,14 @@
 # Kritva Actuator Kritva-S
 
-> Mechanical design, sizing inputs, BOM, drawings and test plans for the Kritva-S variant of the Kritva actuator family. Child repository of the actuator parent. This is a private repository.
+> Mechanical design, sizing inputs, BOM, drawings and test plans for the Kritva-S variant of the Kritva actuator family. Child repository of the actuator parent. This is a public repository.
 
 | Property | Value |
 |---|---|
 | Project | KritvaOS |
 | Repository | `KritvaOS/kritva-actuator-s` |
 | Repository Type | Mechanical (child of the actuator parent repository) |
-| Visibility Class | PRIVATE (future private; ACT-DEC-023, D-037, D-039 in kritva-program) |
-| GitHub Setting | PUBLIC (verified 2026-10-18; temporary, ACT-DEC-023 amendments and D-028: owner action returns it to private) |
+| Visibility Class | PUBLIC (ACT-DEC-034 in kritva-actuator supersedes the private position of ACT-DEC-023) |
+| GitHub Setting | PUBLIC (verified 2026-10-18; kept public by decision, ACT-DEC-034, 2026-10-24) |
 | Lifecycle Status | ACTIVE (concept stage; no design artefact committed) |
 | Repository Owner | Mechanical Intern 1 (role); Project Lead approves |
 | Security Owner | Security Owner role ([SECURITY.md](SECURITY.md)) |
@@ -17,9 +17,9 @@
 | Tasks | [status/tasks.csv](status/tasks.csv) |
 | Acceptance Criteria | [Parent audit/mechanical/MECHANICAL_ACCEPTANCE_AUDIT.md](https://github.com/KritvaOS/kritva-actuator/blob/main/audit/mechanical/MECHANICAL_ACCEPTANCE_AUDIT.md) |
 | Status Reporting | [status/status.json](status/status.json) (generated) |
-| License | [LICENSE](LICENSE) (proprietary, all rights reserved) |
+| License | [LICENSE](LICENSE) (Apache-2.0; ACT-DEC-035 in kritva-actuator) |
 
-This README follows the Kritva README standard (`v2/planning/standards/README_STANDARD.md` in [kritva-program](https://github.com/KritvaOS/kritva-program)). It is a navigation map; the documents it links own the detail. Proprietary and confidential. Copyright (c) 2026 Kritvaos. All rights reserved.
+This README follows the Kritva README standard (`v2/planning/standards/README_STANDARD.md` in [kritva-program](https://github.com/KritvaOS/kritva-program)). It is a navigation map; the documents it links own the detail. Copyright (c) 2026 Kritvaos. Licensed under the Apache License, Version 2.0 (see [LICENSE](LICENSE)).
 
 ## 1. Purpose and Scope
 
@@ -377,4 +377,4 @@ If a document you need is missing or contradicts another, raise it with the Proj
 
 ## 17. License
 
-Proprietary and confidential. Copyright (c) 2026 Kritvaos. All rights reserved. See [LICENSE](LICENSE).
+Copyright (c) 2026 Kritvaos. Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE). Third-party components keep their own licences.

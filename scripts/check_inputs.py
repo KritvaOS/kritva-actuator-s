@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Check sizing/inputs.json has every key the shared sizing engine expects.
 
-Proprietary and confidential. Copyright (c) 2026 Kritvaos. All rights reserved.
+Copyright (c) 2026 Kritvaos. Licensed under the Apache License, Version 2.0 (see LICENSE).
 The engine itself lives in the parent repository (mechanical/common-sizing/).
 Standard library only. Exit 0 ok, 1 errors.
 """
